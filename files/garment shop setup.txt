@@ -1,0 +1,70 @@
+
+
+
+
+//_____________________________Download Projects_____________________________
+//download from git
+git clone https://github.com/tusar8145/garment_shop_all.git
+
+
+
+//_____________________________Setup Environment_____________________________
+//node
+https://nodejs.org/en/download
+
+//python
+https://www.python.org/downloads/windows/
+
+
+
+//_____________________________Install_____________________________
+//install node backend
+npm install
+
+
+//install react frontend
+npm install --force
+
+
+
+//_______________________________Run Project___________________________
+//run node backend
+node index
+	***Database migration: npx prisma migrate dev
+
+
+//run react frontend
+npm run start
+
+//run python 
+python -m uvicorn main:app --reload
+
+
+//_________________________________Postman Collection Import_________________________
+
+//postman collection
+https://api.postman.com/collections/6480971-a28ba64e-196e-466b-8749-6f9c1acad349?access_key=PMAT-01HVRBVR1KWHSG9HCJCGJ62S96
+
+
+
+//_________________________________python libs required_________________________
+
+//python libs used
+pip install -U scikit-learn
+pip install requests
+pip install --user pipenv
+pip install uvicorn
+pip install "fastapi[all]"
+pip install pandas
+pip install matplotlib
+pip install seaborn
+pip install json2csv
+
+
+
+ 
+
+
+
+
+

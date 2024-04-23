@@ -1,0 +1,95 @@
+.testimonial-wrapper {
+  text-align: center;
+  max-width: 950px;
+  margin: 0 auto;
+  border: 1px solid #e6e6e6;
+  padding: 40px 25px;
+  margin-top: 50px;
+}
+
+.this_class table, .this_class th, .this_class td {
+  border: 1px solid black; 
+  border-collapse: collapse;
+width:16.66%;
+}
+
+.this_class table {
+width:100%
+}
+
+
+.this_class th, .this_class td {
+padding-left: 10px;
+}
+
+    .this_class table { page-break-inside:avoid;}
+    .this_class tr    { page-break-inside:avoid; page-break-after:auto }
+    .this_class thead { display:table-header-group }
+    .this_class tfoot { display:table-footer-group }
+
+    .b_zero2 {border-left:0px  !important; border-right:0px  !important; border-top:0px  !important; border-bottom: 1px solid lightgray !important;}
+    .b_zero {border:0px !important}
+    .tg  {border-collapse:collapse;border-spacing:0; width:100%}
+    .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+      padding:10px 5px;word-break:normal;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px; font-weight:normal;padding:10px 5px;word-break:normal;       padding-left: 10px;
+      padding-right: 10px;}
+    .tg .tg-0lax{text-align:left;vertical-align:top }
+
+    .b_zero_sm {
+        border:1px  solid lightgray!important;
+        padding-left:5px;
+        padding-right:5px;
+        padding-top:0px;
+    }
+
+    .defmar{
+       
+      margin-bottom: -7px;
+      margin-right: -10px;
+    }
+
+
+ .header_td{
+  background: lightgray;
+  font-weight: 500;
+ }
+
+ .blzero{
+    border-left: 0px !important;
+    border-right: 0px !important;
+ }
+
+ .blzeroleft{
+  border-left:1px solid lightgray !important;
+}
+.blzeroright{
+  border-right:1px solid lightgray !important;
+}
+
+
+
+.css-1m0jcr3-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
+  background-color: #fff;
+  color: rgba(52, 49, 76, 1);
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  /* border-radius: 4px; */
+  box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.2), -11px 14px 15px -20px rgba(0,0,0,0.14), -2px 3px 3px 0px rgba(0,0,0,0.12);
+  position: absolute;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-width: 16px;
+  min-height: 16px;
+  max-width: calc(100% - 32px);
+  max-height: calc(100% - 32px);
+  outline: 0;
+  max-height: calc(100% - 96px);
+  -webkit-overflow-scrolling: touch;
+}
