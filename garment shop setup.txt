@@ -4,7 +4,7 @@
 
 //_____________________________Download Projects_____________________________
 //download from git
-git clone https://github.com/tusar8145/garment_shop_all.git
+git clone https://github.com/tusar8145/garment-shop-management.git
 
 
 
