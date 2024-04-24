@@ -9,6 +9,7 @@ router.post("/rating/list", auth,  RatingController.rating_list);
 router.post("/rating/count", auth,  RatingController.rating_count);
 router.get("/public/rating",  RatingController.rating_data);
 router.get("/public/rating-garment",  RatingController.rating_garment_data);
+router.get("/public/rating-submit",  RatingController.rating_submit);
 
 export { router as RatingRoute };  
 

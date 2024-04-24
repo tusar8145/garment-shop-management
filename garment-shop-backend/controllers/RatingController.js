@@ -45,9 +45,23 @@ export const rating_create =  async (req, res, next) => {
         })
 
         if(findDuplicate.length>0){
-            return res.status(200).json({
-                success:false, message:'Duplicate rating not allowed!'
-            });
+
+
+            let html=`
+            <!DOCTYPE html>
+            <html>
+            <body>
+            
+            <h1>Garment Shop Management</h1>
+            <p style="color:red">Duplicate rating not allowed!</p> 
+            </body>
+            </html>
+                    
+                    `
+                    res.send(html)
+
+
+
         }
 
 
@@ -73,10 +87,23 @@ export const rating_create =  async (req, res, next) => {
             },
         })
 
+        let html=`
+        <!DOCTYPE html>
+        <html>
+        <body>
+        
+        <h1>Garment Shop Management</h1>
+        <p style="color:green">Reting Success</p> 
+        </body>
+        </html>
+                
+                `
+                res.send(html)
 
-        return res.status(200).json({
+
+        /*return res.status(200).json({
                 ...create_msg_formate(JSON.stringify(createMany))
-        });
+        });*/
 
     }catch(error){
         next(error)
@@ -111,7 +138,48 @@ export const rating_list =  async (req, res, next) => {
     }
 }; 
 
- 
+
+
+export const rating_submit =  async (req, res, next) => {
+    try {   
+
+        let garment_id=parseInt(req.query.garment_id) || ""
+        let  order_id=parseInt(req.query.order_id) || ""
+
+        const html=`
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Garment Shop Management</h1>
+<p>Customer Rating</p>
+<form action="/api/public/rating/create">
+
+<label for="garment_id">Garment Id:</label><br>
+<input type="text" required readonly id="garment_id" name="garment_id" value="`+garment_id+`"><br>
+<label for="order_id">Order Id:</label><br>
+<input type="text" required readonly id="order_id" name="order_id" value="`+order_id+`"><br><br>
+
+  <label for="rating">Rating:</label><br>
+  <input type="number"  required  id="rating" name="rating" value=""><br>
+  <label for="review">Review:</label><br>
+  <input type="text" required id="review" name="review" value=""><br><br>
+  <input type="submit" value="Submit">
+</form> 
+
+</body>
+</html>
+        
+        `
+        res.send(html)
+
+    }catch(error){
+        next(error)
+    }
+}; 
+
+
+
 export const rating_data =  async (req, res, next) => {
     try {   
 
