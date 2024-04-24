@@ -179,6 +179,8 @@ const Order = () => {
                       <TableCell align="right">Order Value</TableCell>
                       <TableCell align="right">Quantity</TableCell>
                       <TableCell align="right">Total price ($)</TableCell>
+                      <TableCell align="right"></TableCell>
+                      <TableCell align="right">Rating url</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -193,6 +195,8 @@ const Order = () => {
                         <TableCell align="right">
                           {Math.round((history?.garments?.unit_price-history?.garments?.discount) * history?.quantity)}
                         </TableCell>
+                        <TableCell align="right"></TableCell>
+                        <TableCell align="right">http://localhost:8000/api/public/rating-submit?garment_id={history?.garments?.id}&order_id={row.id}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
