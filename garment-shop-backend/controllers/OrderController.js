@@ -110,6 +110,7 @@ export const order_list =  async (req, res, next) => {
                 order_detail_orders:{
                     select:{
                         garments:{select:{
+                            id:true,
                             name:true,
                             sku:true,
                             stock:true,
