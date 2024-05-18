@@ -1,0 +1,204 @@
+generator client {
+  provider        = "prisma-client-js"
+  binaryTargets   = ["native", "debian-openssl-1.1.x"]
+  previewFeatures = "clientExtensions"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+ 
+enum Role {
+SuperAdmin
+Admin
+Storekeeper
+}
+
+enum Delivery_status {
+Pending
+Confirmed
+Pickedup
+Ontheway
+Delivered
+Cancelled
+}
+ 
+enum Payment_status {
+Paid
+Unpaid
+}
+
+model admins {
+  id                           Int         @id @default(autoincrement())
+  name                         String
+  role                         Role        @default(Admin)
+  email                        String?     @unique(map: "admins_email_unique")
+  password                     String
+  address                      String?     @db.VarChar(300)
+  phone                        String?      @db.VarChar(20)
+  created_at                   DateTime?   @db.Timestamp(0)
+  updated_at                   DateTime?   @db.Timestamp(0)
+
+  order_tracking_admin order_trackings[] @relation("admin_con")
+  order_admin orders[] @relation("admin_con")
+  purchase_admin purchases[] @relation("admin_con")
+  garment_admin garments[] @relation("admin_con")
+  supplier_admin suppliers[] @relation("admin_con")
+  customer_admin customers[] @relation("admin_con")
+}
+
+model customers {
+  id                           Int         @id @default(autoincrement())
+  name                         String
+  email                        String?     @unique(map: "admins_email_unique")
+  address                      String?     @db.VarChar(300)
+  phone                        String?     @db.VarChar(20)
+  created_by                      Int            
+  created_at                   DateTime?   @db.Timestamp(0)
+  updated_at                   DateTime?   @db.Timestamp(0)
+
+  order_customer orders[] @relation("customer_con")
+  admins admins? @relation("admin_con", fields: [created_by], references: [id])
+  order_garment_rating_customer ratings[] @relation("customer_con")
+}
+
+model suppliers {
+  id                           Int         @id @default(autoincrement())
+  name                         String
+  email                        String?     @unique(map: "admins_email_unique")
+  address                      String?     @db.VarChar(300)
+  phone                        String?     @db.VarChar(20)
+  created_by                      Int            
+  created_at                   DateTime?   @db.Timestamp(0)
+  updated_at                   DateTime?   @db.Timestamp(0)
+
+  purchase_supplier purchases[] @relation("supplier_con")
+  admins admins? @relation("admin_con", fields: [created_by], references: [id])
+}
+
+model garments {
+  id                     Int             @id @default(autoincrement())
+  name                   String          @db.VarChar(200)
+  sku                    String
+  stock                  Int
+  category_id            Int
+  brand_id               Int?
+  description            String?         @db.LongText
+  size                   String?
+  color                  String?
+  unit_price             Float
+  purchase_price         Float?
+  discount               Float?
+  created_by                Int            
+  created_at             DateTime? @default(now()) @db.Timestamp(0)
+  updated_at             DateTime? @default(now()) @db.Timestamp(0)
+
+  categories categories? @relation("category_con", fields: [category_id], references: [id])
+  order_detail_garment order_details[] @relation("garment_con")
+  purchase_detail_garment purchase_details[] @relation("garment_con")
+  admins admins? @relation("admin_con", fields: [created_by], references: [id])
+  brands brands? @relation("brand_con", fields: [brand_id], references: [id])
+  order_garment_rating_garment ratings[] @relation("garment_con")
+}
+
+model categories {
+  id               Int       @id @default(autoincrement())
+  name             String    @db.VarChar(50)
+
+  garment_category garments[] @relation("category_con")
+}
+
+model brands {
+  id               Int       @id @default(autoincrement())
+  name             String    @db.VarChar(50)
+  garment_brand garments[] @relation("brand_con")
+}
+
+
+model purchases {
+  id                     Int              @id @default(autoincrement())
+  supplier_id            Int?
+  delivery_status        Delivery_status
+  payment_status         Payment_status
+  grand_total            Float
+  date                   String  
+  created_by             Int?            
+  created_at             DateTime?        @default(now()) @db.Timestamp(0)
+  updated_at             DateTime?        @default(now()) @db.Timestamp(0)
+
+  suppliers suppliers? @relation("supplier_con", fields: [supplier_id], references: [id])
+  purchase_detail_purchases purchase_details[] @relation("purchase_con")
+  admins admins? @relation("admin_con", fields: [created_by], references: [id])
+}
+
+model purchase_details { 
+  id                      Int             @id @default(autoincrement())
+  purchase_id             Int
+  garment_id              Int
+  price                   Int
+  quantity                Int
+
+  purchases purchases? @relation("purchase_con", fields: [purchase_id], references: [id])
+  garments garments? @relation("garment_con", fields: [garment_id], references: [id])
+}
+
+
+model orders {
+  id                     Int              @id @default(autoincrement())
+  customer_id            Int
+  shipping_address       String           @db.LongText
+  delivery_status        Delivery_status
+  payment_status         Payment_status
+  discount               Float?
+  grand_total            Float
+  date                   String
+  created_by                Int            
+  created_at             DateTime?        @default(now()) @db.Timestamp(0)
+  updated_at             DateTime?        @default(now()) @db.Timestamp(0)
+  
+  customers customers? @relation("customer_con", fields: [customer_id], references: [id])
+  order_detail_orders order_details[] @relation("order_con")
+  order_tracking_orders order_trackings[] @relation("order_con")
+  admins admins? @relation("admin_con", fields: [created_by], references: [id])
+  order_garment_rating_order ratings[] @relation("order_con")
+}
+
+
+model ratings {
+  id                     Int             @id @default(autoincrement())
+  customer_id            Int
+  garment_id             Int
+  order_id               Int
+  rating                 Int
+  created_at             DateTime? @default(now()) @db.Timestamp(0)
+  customers customers? @relation("customer_con", fields: [customer_id], references: [id])
+  garments garments? @relation("garment_con", fields: [garment_id], references: [id])
+  orders orders? @relation("order_con", fields: [order_id], references: [id])
+}
+
+model order_details { 
+  id                      Int             @id @default(autoincrement())
+  order_id                Int
+  garment_id              Int
+  price                   Int
+  quantity                Int
+  review                  String?
+  orders orders? @relation("order_con", fields: [order_id], references: [id])
+  garments garments? @relation("garment_con", fields: [garment_id], references: [id])
+}
+
+model order_trackings {
+  id                     Int              @id @default(autoincrement())
+  order_id               Int
+  delivery_status        Delivery_status    
+  payment_status         Payment_status          
+  created_by             Int            
+  date                   String
+  created_at             DateTime?        @default(now()) @db.Timestamp(0)
+  updated_at             DateTime?        @default(now()) @db.Timestamp(0)
+  
+  orders orders? @relation("order_con", fields: [order_id], references: [id])
+  admins admins? @relation("admin_con", fields: [created_by], references: [id])
+}
