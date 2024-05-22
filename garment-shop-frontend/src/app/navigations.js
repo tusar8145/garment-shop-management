@@ -11,7 +11,9 @@ export const navigations = [
   { name: 'New Order', path: '/order-create', icon: 'launch', },
   { name: 'Order List', path: '/order-list', icon: 'launch', },
 
- 
+  { label: 'User', type: 'label' },
+  { name: 'Customer', path: '/customer', icon: 'launch', },
+  { name: 'Supplier', path: '/supplier', icon: 'launch', },
  
  
 ];

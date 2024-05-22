@@ -9,6 +9,8 @@ import purchaseRoutes from 'app/views/purchase/PurchaseRoutes';
 import purchaseListRoutes from 'app/views/purchase-list/PurchaseListRoutes'; 
 import orderRoutes from 'app/views/order/OrderRoutes'; 
 import orderListRoutes from 'app/views/order-list/OrderListRoutes'; 
+import CustomerRoutes from 'app/views/customer/CustomerRoutes'; 
+import SupplierRoutes from 'app/views/supplier/SupplierRoutes'; 
 const routes = [
   {
     element: (
@@ -16,7 +18,7 @@ const routes = [
         <MatxLayout />
       </AuthGuard>
     ),
-    children: [ ...orderRoutes, ...orderListRoutes, ...dashboardRoutes,   ...purchaseRoutes,   ...purchaseListRoutes,],
+    children: [ ...orderRoutes, ...orderListRoutes, ...dashboardRoutes,   ...purchaseRoutes,   ...purchaseListRoutes, ...CustomerRoutes, ...SupplierRoutes],
   },
   ...sessionRoutes,
   { path: '/', element: <Navigate to="dashboard/default" /> },
